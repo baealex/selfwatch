@@ -34,11 +34,13 @@ class DatePickState extends State {
   _handleClick(BuildContext context, bool? next) async {
     final daethDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
+      initialDate: DateTime.now().add(Duration(days: 1)),
+      firstDate: DateTime.now().add(Duration(days: 1)),
       lastDate: DateTime(9999, 12, 31),
     );
-    Navigator.push(context, MaterialPageRoute(builder: (context) => CountDown(daethDate!)));
+    if (daethDate != null) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => CountDown(daethDate)));
+    }
     // print(daethDate.toString());
     // setState(() => {
     //   checked = next!
