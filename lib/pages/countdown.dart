@@ -43,9 +43,18 @@ class CountDownState extends State {
           brightness: Brightness.dark,
           title: Text(''),
         ),
-        backgroundColor: Color(0xffffffff),
+        backgroundColor: Color(0xff000000),
         body: Center(
-          child: Text(showTime.toStringAsFixed(8)),
+          child: Text(
+            showTime.toStringAsFixed(8),
+            style: TextStyle(
+              fontFamily: 'mono',
+              fontWeight: FontWeight.w600,
+              fontSize: 24,
+              letterSpacing: 2,
+              color: Color(0xffffffff)
+            ),
+          ),
         ),
       )
     );

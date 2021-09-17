@@ -10,7 +10,7 @@ class DatePick extends StatefulWidget {
 class DatePickState extends State {
   bool checked = false;
 
-  _handleClick(BuildContext context, bool? next) async {
+  _handleClick(BuildContext context) async {
     final daethDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now().add(Duration(days: 1)),
@@ -20,10 +20,6 @@ class DatePickState extends State {
     if (daethDate != null) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => CountDown(daethDate)));
     }
-    // print(daethDate.toString());
-    // setState(() => {
-    //   checked = next!
-    // });
   }
 
   @override
@@ -35,12 +31,21 @@ class DatePickState extends State {
           brightness: Brightness.dark,
           title: Text(''),
         ),
-        backgroundColor: Color(0xffffffff),
+        backgroundColor: Color(0xff000000),
         body: Center(
-          child: Checkbox(
-            value: checked,
-            onChanged: (next) => _handleClick(context, next)
-          ),
+          child: TextButton(
+            onPressed: () => _handleClick(context),
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.resolveWith((states) {
+                if (states.contains(MaterialState.pressed)) {
+                  return Colors.white;
+                } else {
+                  return Colors.red;
+                }
+              })
+            ),
+            child: Text('Select'),
+          )
         ),
       )
     );
